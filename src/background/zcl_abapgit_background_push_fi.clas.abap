@@ -1,38 +1,38 @@
 CLASS zcl_abapgit_background_push_fi DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
-    INTERFACES zif_abapgit_background .
+    INTERFACES zif_abapgit_background.
   PROTECTED SECTION.
 
     CONSTANTS:
       BEGIN OF c_settings,
         name  TYPE string VALUE 'NAME',
         email TYPE string VALUE 'EMAIL',
-      END OF c_settings .
-    DATA mi_log TYPE REF TO zif_abapgit_log .
+      END OF c_settings.
+    DATA mi_log TYPE REF TO zif_abapgit_log.
 
     METHODS build_comment
       IMPORTING
         !is_files         TYPE zif_abapgit_definitions=>ty_stage_files
       RETURNING
-        VALUE(rv_comment) TYPE string .
+        VALUE(rv_comment) TYPE string.
     METHODS push_fixed
       IMPORTING
         !io_repo  TYPE REF TO zcl_abapgit_repo_online
         !iv_name  TYPE string
         !iv_email TYPE string
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_BACKGROUND_PUSH_FI IMPLEMENTATION.
+CLASS zcl_abapgit_background_push_fi IMPLEMENTATION.
 
 
   METHOD build_comment.
@@ -41,7 +41,6 @@ CLASS ZCL_ABAPGIT_BACKGROUND_PUSH_FI IMPLEMENTATION.
           lv_str     TYPE string.
 
     FIELD-SYMBOLS: <ls_local> LIKE LINE OF is_files-local.
-
 
     LOOP AT is_files-local ASSIGNING <ls_local>.
       lv_str = |{ <ls_local>-item-obj_type } { <ls_local>-item-obj_name }|.
@@ -71,7 +70,6 @@ CLASS ZCL_ABAPGIT_BACKGROUND_PUSH_FI IMPLEMENTATION.
 
     FIELD-SYMBOLS: <ls_local>  LIKE LINE OF ls_files-local,
                    <ls_remote> LIKE LINE OF ls_files-remote.
-
 
     ls_files = zcl_abapgit_factory=>get_stage_logic( )->get( io_repo ).
     ASSERT lines( ls_files-local ) > 0
@@ -115,7 +113,6 @@ CLASS ZCL_ABAPGIT_BACKGROUND_PUSH_FI IMPLEMENTATION.
   METHOD zif_abapgit_background~get_settings.
 
     DATA: ls_setting LIKE LINE OF ct_settings.
-
 
     READ TABLE ct_settings WITH KEY key = c_settings-name INTO ls_setting.
     IF sy-subrc <> 0.

@@ -1,17 +1,17 @@
 CLASS zcl_abapgit_background_pull DEFINITION
   PUBLIC
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
-    INTERFACES zif_abapgit_background .
+    INTERFACES zif_abapgit_background.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_BACKGROUND_PULL IMPLEMENTATION.
+CLASS zcl_abapgit_background_pull IMPLEMENTATION.
 
 
   METHOD zif_abapgit_background~get_description.
@@ -31,7 +31,6 @@ CLASS ZCL_ABAPGIT_BACKGROUND_PULL IMPLEMENTATION.
     DATA: ls_checks TYPE zif_abapgit_definitions=>ty_deserialize_checks.
 
     FIELD-SYMBOLS: <ls_overwrite> LIKE LINE OF ls_checks-overwrite.
-
 
     ls_checks = io_repo->deserialize_checks( ).
 

@@ -1,28 +1,30 @@
 CLASS zcl_abapgit_background DEFINITION
   PUBLIC
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
-    TYPES: BEGIN OF ty_method,
-             class       TYPE seoclsname,
-             description TYPE string,
-           END OF ty_method.
-
-    TYPES: ty_methods TYPE SORTED TABLE OF ty_method WITH UNIQUE KEY class.
+    TYPES:
+      BEGIN OF ty_method,
+        class       TYPE seoclsname,
+        description TYPE string,
+      END OF ty_method.
+    TYPES:
+      ty_methods TYPE SORTED TABLE OF ty_method WITH UNIQUE KEY class.
 
     CLASS-METHODS run
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS list_methods
-      RETURNING VALUE(rt_methods) TYPE ty_methods.
+      RETURNING
+        VALUE(rt_methods) TYPE ty_methods.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_BACKGROUND IMPLEMENTATION.
+CLASS zcl_abapgit_background IMPLEMENTATION.
 
 
   METHOD list_methods.
@@ -34,8 +36,7 @@ CLASS ZCL_ABAPGIT_BACKGROUND IMPLEMENTATION.
 
     FIELD-SYMBOLS: <ls_method> LIKE LINE OF rt_methods.
 
-
-* in order to handle local classes in the compiled report
+    " in order to handle local classes in the compiled report
     ls_method-class = 'ZCL_ABAPGIT_BACKGROUND_PULL'.
     INSERT ls_method INTO TABLE rt_methods.
     ls_method-class = 'ZCL_ABAPGIT_BACKGROUND_PUSH_AU'.
@@ -80,7 +81,6 @@ CLASS ZCL_ABAPGIT_BACKGROUND IMPLEMENTATION.
           lv_repo_name  TYPE string.
 
     FIELD-SYMBOLS: <ls_list> LIKE LINE OF lt_list.
-
 
     CALL FUNCTION 'ENQUEUE_EZABAPGIT'
       EXPORTING

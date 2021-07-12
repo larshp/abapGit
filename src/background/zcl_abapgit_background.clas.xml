@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ABAPGIT_BACKGROUND</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Background processing</DESCRIPT>
+    <DESCRIPT>abapGit - Background Processing</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

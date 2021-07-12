@@ -1,36 +1,36 @@
 CLASS zcl_abapgit_background_push_au DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
-    INTERFACES zif_abapgit_background .
+    INTERFACES zif_abapgit_background.
   PROTECTED SECTION.
 
-    DATA mi_log TYPE REF TO zif_abapgit_log .
+    DATA mi_log TYPE REF TO zif_abapgit_log.
 
     METHODS build_comment
       IMPORTING
         !is_files         TYPE zif_abapgit_definitions=>ty_stage_files
       RETURNING
-        VALUE(rv_comment) TYPE string .
+        VALUE(rv_comment) TYPE string.
     METHODS push_auto
       IMPORTING
         !io_repo TYPE REF TO zcl_abapgit_repo_online
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS determine_user_details
       IMPORTING
         !iv_changed_by TYPE xubname
       RETURNING
-        VALUE(rs_user) TYPE zif_abapgit_definitions=>ty_git_user .
+        VALUE(rs_user) TYPE zif_abapgit_definitions=>ty_git_user.
     METHODS push_deletions
       IMPORTING
         !io_repo  TYPE REF TO zcl_abapgit_repo_online
         !is_files TYPE zif_abapgit_definitions=>ty_stage_files
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PRIVATE SECTION.
 ENDCLASS.
 
@@ -45,7 +45,6 @@ CLASS zcl_abapgit_background_push_au IMPLEMENTATION.
           lv_str     TYPE string.
 
     FIELD-SYMBOLS: <ls_local> LIKE LINE OF is_files-local.
-
 
     LOOP AT is_files-local ASSIGNING <ls_local>.
       lv_str = |{ <ls_local>-item-obj_type } { <ls_local>-item-obj_name }|.
@@ -70,7 +69,6 @@ CLASS zcl_abapgit_background_push_au IMPLEMENTATION.
   METHOD determine_user_details.
 
     DATA: lo_user_record TYPE REF TO zcl_abapgit_user_record.
-
 
     lo_user_record = zcl_abapgit_user_record=>get_instance( iv_changed_by ).
     rs_user-name = lo_user_record->get_name( ).
@@ -108,7 +106,6 @@ CLASS zcl_abapgit_background_push_au IMPLEMENTATION.
     FIELD-SYMBOLS: <ls_changed> LIKE LINE OF lt_changed,
                    <ls_remote>  LIKE LINE OF ls_files-remote,
                    <ls_local>   LIKE LINE OF ls_files-local.
-
 
     ls_files = zcl_abapgit_factory=>get_stage_logic( )->get( io_repo ).
 
@@ -223,9 +220,7 @@ CLASS zcl_abapgit_background_push_au IMPLEMENTATION.
 
 
   METHOD zif_abapgit_background~get_settings.
-
     RETURN.
-
   ENDMETHOD.
 
 
