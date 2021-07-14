@@ -293,9 +293,9 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_CODI_BASE IMPLEMENTATION.
           lv_line_number_s TYPE string,
           lv_line_number   TYPE i.
 
-    lv_temp = replace( val   = ii_event->mv_action
-                       regex = |^{ c_ci_sig }|
-                       with  = `` ).
+    lv_temp = to_upper( replace( val   = ii_event->mv_action
+                                 regex = |^{ c_ci_sig }|
+                                 with  = `` ) ).
 
     IF lv_temp <> ii_event->mv_action. " CI navigation request detected
 

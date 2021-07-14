@@ -115,10 +115,15 @@ CLASS zcl_abapgit_gui IMPLEMENTATION.
   METHOD back.
 
     DATA: lv_index TYPE i,
-          ls_stack LIKE LINE OF mt_stack.
+          ls_stack LIKE LINE OF mt_stack,
+          lv_url   TYPE w3url.
 
-    " If viewer is showing Internet page, then use browser navigation
-    IF mi_html_viewer->get_url( ) CP 'http*'.
+    " If viewer is showing Internet page, then use browser navigation.
+    " With SAPGUI 7.70 patch 2 URLs changed and internal pages also
+    " use http. Therefore additional logic for checking saphtmlp
+    " was added. Http check still needed for downward compatibility.
+    lv_url = mi_html_viewer->get_url( ).
+    IF  lv_url CP 'http*' AND lv_url NS 'saphtmlp'.
       mi_html_viewer->back( ).
       RETURN.
     ENDIF.

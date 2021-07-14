@@ -308,8 +308,8 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
           lv_key    TYPE zif_abapgit_persistence=>ty_repo-key.
 
     lv_key             = ii_event->query( )->get( 'KEY' ).
-    ls_file-path       = ii_event->query( )->get( 'PATH' ).
-    ls_file-filename   = ii_event->query( )->get( 'FILENAME' ). " unescape ?
+    ls_file-path       = to_lower( ii_event->query( )->get( 'PATH' ) ).
+    ls_file-filename   = to_lower( ii_event->query( )->get( 'FILENAME' ) ). " unescape ?
     ls_object-obj_type = ii_event->query( )->get( 'OBJ_TYPE' ).
     ls_object-obj_name = ii_event->query( )->get( 'OBJ_NAME' ). " unescape ?
 

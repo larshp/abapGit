@@ -446,6 +446,7 @@ CLASS zcl_abapgit_gui_page_diff IMPLEMENTATION.
 
       READ TABLE lt_status ASSIGNING <ls_status>
         WITH KEY path = is_file-path filename = is_file-filename.
+      ASSERT sy-subrc = 0.
 
       append_diff( it_remote = lt_remote
                    it_local  = lt_local

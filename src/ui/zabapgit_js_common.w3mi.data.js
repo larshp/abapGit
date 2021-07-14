@@ -109,7 +109,9 @@ function submitSapeventForm(params, action, method) {
 
   function getSapeventPrefix() {
     if (document.querySelector('a[href*="file:///SAPEVENT:"]'))  {
-      return "file:///"; //Prefix for chromium based browser control
+      return "file:///"; //Prefix for chromium based browser control SAGUI 7.70 upto patch 1
+    } else if (document.querySelector('a[href*="SAPEVENT"]')) {
+      return "/"; //Prefix for chromium based browser control from SAPGUI 7.70 patch 2
     } else {
       return "";
     }
