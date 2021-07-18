@@ -3,7 +3,7 @@ INTERFACE zif_abapgit_gui_asset_manager
 
   TYPES:
     BEGIN OF ty_web_asset,
-      url          TYPE w3url,
+      url          TYPE string,
       type         TYPE c LENGTH 50,
       subtype      TYPE c LENGTH 50,
       content      TYPE xstring,

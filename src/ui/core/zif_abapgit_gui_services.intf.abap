@@ -6,11 +6,11 @@ INTERFACE zif_abapgit_gui_services
     IMPORTING
       !iv_text      TYPE string OPTIONAL
       !iv_xdata     TYPE xstring OPTIONAL
-      !iv_url       TYPE w3url OPTIONAL
+      !iv_url       TYPE string OPTIONAL
       !iv_type      TYPE c
       !iv_subtype   TYPE c
     RETURNING
-      VALUE(rv_url) TYPE w3url
+      VALUE(rv_url) TYPE string
     RAISING
       zcx_abapgit_exception .
   METHODS register_event_handler
