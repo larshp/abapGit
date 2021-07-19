@@ -4,37 +4,43 @@ CLASS zcl_abapgit_apack_migration DEFINITION
   CREATE PRIVATE.
 
   PUBLIC SECTION.
-    CONSTANTS: c_apack_interface_version TYPE i VALUE 1.
-    CLASS-METHODS: run RAISING zcx_abapgit_exception.
-    METHODS: perform_migration RAISING zcx_abapgit_exception.
+
+    CONSTANTS c_apack_interface_version TYPE i VALUE 1 ##NO_TEXT.
+
+    CLASS-METHODS run
+      RAISING
+        zcx_abapgit_exception.
+    METHODS perform_migration
+      RAISING
+        zcx_abapgit_exception.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
     METHODS interface_exists
       RETURNING
-        VALUE(rv_interface_exists) TYPE abap_bool .
+        VALUE(rv_interface_exists) TYPE abap_bool.
     METHODS interface_valid
       RETURNING
-        VALUE(rv_interface_valid) TYPE abap_bool .
+        VALUE(rv_interface_valid) TYPE abap_bool.
     METHODS create_interface
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS add_interface_source_classic
       IMPORTING
         !is_clskey TYPE seoclskey
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS add_interface_source
       IMPORTING
         !is_clskey TYPE seoclskey
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS get_interface_source
       RETURNING
-        VALUE(rt_source) TYPE zif_abapgit_definitions=>ty_string_tt .
+        VALUE(rt_source) TYPE zif_abapgit_definitions=>ty_string_tt.
     METHODS add_intf_source_and_activate
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
 ENDCLASS.
 
 
@@ -43,6 +49,7 @@ CLASS zcl_abapgit_apack_migration IMPLEMENTATION.
 
 
   METHOD add_interface_source.
+
     DATA: lo_factory     TYPE REF TO object,
           lo_source      TYPE REF TO object,
           lt_source_code TYPE zif_abapgit_definitions=>ty_string_tt.
@@ -89,6 +96,7 @@ CLASS zcl_abapgit_apack_migration IMPLEMENTATION.
 
 
   METHOD add_interface_source_classic.
+
     DATA: lo_source      TYPE REF TO cl_oo_source,
           lt_source_code TYPE zif_abapgit_definitions=>ty_string_tt.
 
@@ -113,6 +121,7 @@ CLASS zcl_abapgit_apack_migration IMPLEMENTATION.
       CATCH cx_oo_source_save_failure.
         zcx_abapgit_exception=>raise( 'save failure' ).
     ENDTRY.
+
   ENDMETHOD.
 
 

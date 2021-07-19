@@ -1,7 +1,7 @@
 CLASS zcl_abapgit_apack_writer DEFINITION
   PUBLIC
   FINAL
-  CREATE PRIVATE .
+  CREATE PRIVATE.
 
   PUBLIC SECTION.
 
@@ -9,19 +9,19 @@ CLASS zcl_abapgit_apack_writer DEFINITION
       IMPORTING
         !is_apack_manifest_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor
       RETURNING
-        VALUE(ro_manifest_writer)     TYPE REF TO zcl_abapgit_apack_writer .
+        VALUE(ro_manifest_writer)     TYPE REF TO zcl_abapgit_apack_writer.
     METHODS serialize
       RETURNING
         VALUE(rv_xml) TYPE string
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS constructor
       IMPORTING
-        !is_apack_manifest_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor .
+        !is_apack_manifest_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
-    DATA ms_manifest_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor .
+    DATA ms_manifest_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor.
 ENDCLASS.
 
 
@@ -42,6 +42,7 @@ CLASS zcl_abapgit_apack_writer IMPLEMENTATION.
   METHOD serialize.
 
     DATA: ls_manifest_descriptor LIKE ms_manifest_descriptor.
+
     FIELD-SYMBOLS: <ls_dependency> LIKE LINE OF ls_manifest_descriptor-dependencies.
 
     " Setting repository type automatically to 'abapGit' as there is no other one right now

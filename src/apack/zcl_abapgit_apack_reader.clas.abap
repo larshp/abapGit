@@ -1,17 +1,17 @@
 CLASS zcl_abapgit_apack_reader DEFINITION
   PUBLIC
   FINAL
-  CREATE PRIVATE .
+  CREATE PRIVATE.
 
   PUBLIC SECTION.
 
-    TYPES ty_package_name TYPE devclass .
+    TYPES ty_package_name TYPE devclass.
 
     CLASS-METHODS create_instance
       IMPORTING
         !iv_package_name          TYPE ty_package_name
       RETURNING
-        VALUE(ro_manifest_reader) TYPE REF TO zcl_abapgit_apack_reader .
+        VALUE(ro_manifest_reader) TYPE REF TO zcl_abapgit_apack_reader.
     CLASS-METHODS deserialize
       IMPORTING
         !iv_package_name          TYPE ty_package_name
@@ -42,7 +42,7 @@ CLASS zcl_abapgit_apack_reader DEFINITION
         zcx_abapgit_exception.
     METHODS constructor
       IMPORTING
-        !iv_package_name TYPE ty_package_name .
+        !iv_package_name TYPE ty_package_name.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -50,11 +50,11 @@ CLASS zcl_abapgit_apack_reader DEFINITION
       BEGIN OF ty_s_manifest_declaration,
         clsname  TYPE seometarel-clsname,
         devclass TYPE devclass,
-      END OF ty_s_manifest_declaration .
+      END OF ty_s_manifest_declaration.
 
-    DATA mv_package_name TYPE ty_package_name .
-    DATA ms_cached_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor .
-    DATA mv_is_cached TYPE abap_bool .
+    DATA mv_package_name TYPE ty_package_name.
+    DATA ms_cached_descriptor TYPE zif_abapgit_apack_definitions=>ty_descriptor.
+    DATA mv_is_cached TYPE abap_bool.
 
     CLASS-METHODS from_xml
       IMPORTING
@@ -208,6 +208,7 @@ CLASS zcl_abapgit_apack_reader IMPLEMENTATION.
     ENDIF.
 
     rs_manifest_descriptor = ms_cached_descriptor.
+
   ENDMETHOD.
 
 

@@ -1,7 +1,7 @@
 CLASS zcl_abapgit_apack_helper DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
@@ -11,19 +11,19 @@ CLASS zcl_abapgit_apack_helper DEFINITION
       RETURNING
         VALUE(rv_status) TYPE zif_abapgit_definitions=>ty_yes_no
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS dependencies_popup
       IMPORTING
         !it_dependencies TYPE zif_abapgit_apack_definitions=>ty_dependencies
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS to_file
       IMPORTING
         !iv_package    TYPE devclass
       RETURNING
         VALUE(rs_file) TYPE zif_abapgit_definitions=>ty_file
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -31,16 +31,16 @@ CLASS zcl_abapgit_apack_helper DEFINITION
       BEGIN OF ty_manifest_declaration,
         clsname  TYPE seometarel-clsname,
         devclass TYPE devclass,
-      END OF ty_manifest_declaration .
+      END OF ty_manifest_declaration.
     TYPES:
-      ty_manifest_declarations TYPE STANDARD TABLE OF ty_manifest_declaration WITH NON-UNIQUE DEFAULT KEY .
+      ty_manifest_declarations TYPE STANDARD TABLE OF ty_manifest_declaration WITH NON-UNIQUE DEFAULT KEY.
     TYPES:
       BEGIN OF ty_dependency_status,
         met TYPE zif_abapgit_definitions=>ty_yes_no_partial.
         INCLUDE TYPE zif_abapgit_apack_definitions=>ty_dependency.
-    TYPES: END OF ty_dependency_status .
+    TYPES: END OF ty_dependency_status.
     TYPES:
-      ty_dependency_statuses TYPE STANDARD TABLE OF ty_dependency_status WITH NON-UNIQUE DEFAULT KEY .
+      ty_dependency_statuses TYPE STANDARD TABLE OF ty_dependency_status WITH NON-UNIQUE DEFAULT KEY.
 
     CLASS-METHODS get_dependencies_met_status
       IMPORTING
@@ -48,17 +48,17 @@ CLASS zcl_abapgit_apack_helper DEFINITION
       RETURNING
         VALUE(rt_status) TYPE ty_dependency_statuses
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS get_installed_packages
       RETURNING
         VALUE(rt_packages) TYPE zif_abapgit_apack_definitions=>ty_descriptors
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS show_dependencies_popup
       IMPORTING
         !it_dependencies TYPE ty_dependency_statuses
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
 ENDCLASS.
 
 
@@ -191,8 +191,8 @@ CLASS zcl_abapgit_apack_helper IMPLEMENTATION.
         exception(1) TYPE c,
         color        TYPE lvc_t_scol.
         INCLUDE TYPE ty_dependency_status.
-    TYPES: t_hyperlink TYPE salv_t_int4_column,
-           END OF ty_color_line.
+    TYPES: t_hyperlink  TYPE salv_t_int4_column,
+      END OF ty_color_line.
 
     TYPES: ty_color_tab TYPE STANDARD TABLE OF ty_color_line WITH DEFAULT KEY.
 
