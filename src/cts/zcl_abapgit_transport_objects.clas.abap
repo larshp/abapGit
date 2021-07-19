@@ -1,24 +1,24 @@
 CLASS zcl_abapgit_transport_objects DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
     METHODS constructor
       IMPORTING
-        !it_transport_objects TYPE zif_abapgit_definitions=>ty_tadir_tt .
+        !it_transport_objects TYPE zif_abapgit_definitions=>ty_tadir_tt.
     METHODS to_stage
       IMPORTING
         !io_stage           TYPE REF TO zcl_abapgit_stage
         !is_stage_objects   TYPE zif_abapgit_definitions=>ty_stage_files
         !it_object_statuses TYPE zif_abapgit_definitions=>ty_results_tt
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
-    DATA mt_transport_objects TYPE zif_abapgit_definitions=>ty_tadir_tt .
+    DATA mt_transport_objects TYPE zif_abapgit_definitions=>ty_tadir_tt.
 ENDCLASS.
 
 
@@ -32,6 +32,7 @@ CLASS zcl_abapgit_transport_objects IMPLEMENTATION.
 
 
   METHOD to_stage.
+
     DATA: ls_transport_object LIKE LINE OF mt_transport_objects,
           ls_local_file       TYPE zif_abapgit_definitions=>ty_file_item,
           ls_object_status    TYPE zif_abapgit_definitions=>ty_result.
@@ -64,7 +65,7 @@ CLASS zcl_abapgit_transport_objects IMPLEMENTATION.
                 iv_data     = ls_local_file-file-data ).
             ENDIF.
           WHEN zif_abapgit_definitions=>c_state-deleted.
-* SUSC, see https://github.com/abapGit/abapGit/issues/2772
+            " SUSC, see https://github.com/abapGit/abapGit/issues/2772
             IF ls_transport_object-delflag = abap_false
                 AND ls_transport_object-object <> 'SUSC'
                 AND ls_transport_object-object <> 'IWOM'
@@ -87,5 +88,6 @@ CLASS zcl_abapgit_transport_objects IMPLEMENTATION.
         " the stage.
       ENDIF.
     ENDLOOP.
+
   ENDMETHOD.
 ENDCLASS.

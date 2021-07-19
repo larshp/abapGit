@@ -5,7 +5,7 @@
    <VSEOINTERF>
     <CLSNAME>ZIF_ABAPGIT_CTS_API</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Change transport system API</DESCRIPT>
+    <DESCRIPT>abapGit - Change Transport System API</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

@@ -1,7 +1,7 @@
 CLASS zcl_abapgit_transport_2_branch DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
@@ -11,14 +11,14 @@ CLASS zcl_abapgit_transport_2_branch DEFINITION
         !is_transport_to_branch TYPE zif_abapgit_definitions=>ty_transport_to_branch
         !it_transport_objects   TYPE zif_abapgit_definitions=>ty_tadir_tt
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PROTECTED SECTION.
 
     METHODS generate_commit_message
       IMPORTING
         !is_transport_to_branch TYPE zif_abapgit_definitions=>ty_transport_to_branch
       RETURNING
-        VALUE(rs_comment)       TYPE zif_abapgit_definitions=>ty_comment .
+        VALUE(rs_comment)       TYPE zif_abapgit_definitions=>ty_comment.
     METHODS stage_transport_objects
       IMPORTING
         !it_transport_objects TYPE zif_abapgit_definitions=>ty_tadir_tt
@@ -26,16 +26,17 @@ CLASS zcl_abapgit_transport_2_branch DEFINITION
         !is_stage_objects     TYPE zif_abapgit_definitions=>ty_stage_files
         !it_object_statuses   TYPE zif_abapgit_definitions=>ty_results_tt
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_TRANSPORT_2_BRANCH IMPLEMENTATION.
+CLASS zcl_abapgit_transport_2_branch IMPLEMENTATION.
 
 
   METHOD create.
+
     DATA:
       lv_branch_name     TYPE string,
       ls_comment         TYPE zif_abapgit_definitions=>ty_comment,
@@ -75,7 +76,9 @@ CLASS ZCL_ABAPGIT_TRANSPORT_2_BRANCH IMPLEMENTATION.
 
 
   METHOD stage_transport_objects.
+
     DATA lo_transport_objects TYPE REF TO zcl_abapgit_transport_objects.
+
     CREATE OBJECT lo_transport_objects
       EXPORTING
         it_transport_objects = it_transport_objects.
@@ -84,5 +87,6 @@ CLASS ZCL_ABAPGIT_TRANSPORT_2_BRANCH IMPLEMENTATION.
       io_stage           = io_stage
       is_stage_objects   = is_stage_objects
       it_object_statuses = it_object_statuses ).
+
   ENDMETHOD.
 ENDCLASS.

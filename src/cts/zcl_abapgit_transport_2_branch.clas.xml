@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ABAPGIT_TRANSPORT_2_BRANCH</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Transport to branch</DESCRIPT>
+    <DESCRIPT>abapGit - Transport to Branch</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

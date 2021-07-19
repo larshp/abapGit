@@ -1,4 +1,3 @@
-"! Change transport system API
 CLASS zcl_abapgit_cts_api DEFINITION
   PUBLIC
   FINAL
@@ -6,8 +5,8 @@ CLASS zcl_abapgit_cts_api DEFINITION
   GLOBAL FRIENDS zcl_abapgit_factory.
 
   PUBLIC SECTION.
-    INTERFACES:
-      zif_abapgit_cts_api.
+
+    INTERFACES zif_abapgit_cts_api.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -25,7 +24,7 @@ CLASS zcl_abapgit_cts_api DEFINITION
       RETURNING
         VALUE(rv_transport) TYPE trkorr
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     "! Returns the transport request / task that includes the object (even if not locked)
     "! @parameter iv_program_id | Program ID
     "! @parameter iv_object_type | Object type
@@ -40,7 +39,7 @@ CLASS zcl_abapgit_cts_api DEFINITION
       RETURNING
         VALUE(rv_transport) TYPE trkorr
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     "! Check if the object is currently locked in a transport
     "! @parameter iv_program_id | Program ID
     "! @parameter iv_object_type | Object type
@@ -55,7 +54,7 @@ CLASS zcl_abapgit_cts_api DEFINITION
       RETURNING
         VALUE(rv_locked) TYPE abap_bool
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     "! Check if the object type is lockable
     "! @parameter iv_program_id | Program ID
     "! @parameter iv_object_type | Object type
@@ -65,7 +64,7 @@ CLASS zcl_abapgit_cts_api DEFINITION
         !iv_program_id     TYPE pgmid DEFAULT 'R3TR'
         !iv_object_type    TYPE trobjtype
       RETURNING
-        VALUE(rv_lockable) TYPE abap_bool .
+        VALUE(rv_lockable) TYPE abap_bool.
     "! Check if the object type can be transported
     "! @parameter iv_program_id | Program ID
     "! @parameter iv_object_type | Object type
@@ -75,15 +74,16 @@ CLASS zcl_abapgit_cts_api DEFINITION
         !iv_program_id          TYPE pgmid DEFAULT 'R3TR'
         !iv_object_type         TYPE trobjtype
       RETURNING
-        VALUE(rv_transportable) TYPE abap_bool .
+        VALUE(rv_transportable) TYPE abap_bool.
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_CTS_API IMPLEMENTATION.
+CLASS zcl_abapgit_cts_api IMPLEMENTATION.
 
 
   METHOD get_current_transport_for_obj.
+
     DATA: lv_object_lockable   TYPE abap_bool,
           lv_locked            TYPE abap_bool,
           lv_transport_request TYPE trkorr,
@@ -138,6 +138,7 @@ CLASS ZCL_ABAPGIT_CTS_API IMPLEMENTATION.
 
 
   METHOD is_object_locked_in_transport.
+
     DATA: ls_object_key        TYPE e071,
           lv_type_check_result TYPE c LENGTH 1,
           ls_lock_key          TYPE tlock_int,
@@ -171,10 +172,12 @@ CLASS ZCL_ABAPGIT_CTS_API IMPLEMENTATION.
     ENDIF.
 
     rv_locked = boolc( lv_lock_flag <> space ).
+
   ENDMETHOD.
 
 
   METHOD is_object_type_lockable.
+
     DATA: ls_object_key        TYPE e071,
           lv_type_check_result TYPE c LENGTH 1.
 
@@ -189,10 +192,12 @@ CLASS ZCL_ABAPGIT_CTS_API IMPLEMENTATION.
         pe_result = lv_type_check_result.
 
     rv_lockable = boolc( lv_type_check_result = 'L' ).
+
   ENDMETHOD.
 
 
   METHOD is_object_type_transportable.
+
     DATA: ls_object_key        TYPE e071,
           lv_type_check_result TYPE c LENGTH 1.
 
@@ -207,6 +212,7 @@ CLASS ZCL_ABAPGIT_CTS_API IMPLEMENTATION.
         pe_result = lv_type_check_result.
 
     rv_transportable = boolc( lv_type_check_result CA 'RTL' ).
+
   ENDMETHOD.
 
 

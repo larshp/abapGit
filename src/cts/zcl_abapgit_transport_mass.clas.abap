@@ -2,11 +2,11 @@ CLASS zcl_abapgit_transport_mass DEFINITION
   PUBLIC
   INHERITING FROM zcl_abapgit_transport
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
-    CLASS-METHODS run .
+    CLASS-METHODS run.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -35,25 +35,25 @@ CLASS zcl_abapgit_transport_mass IMPLEMENTATION.
           lv_folder = lcl_gui=>f4_folder( ).
 
           IF lv_folder IS INITIAL.
-* Empty folder
+            " Empty folder
             zcx_abapgit_exception=>raise( 'Empty destination folder' ).
           ENDIF.
 
-* Instantiate transport zipper object that will also create the timestamped output folder
+          " Instantiate transport zipper object that will also create the timestamped output folder
           CREATE OBJECT lo_transport_zipper TYPE lcl_transport_zipper
             EXPORTING
               iv_folder = lv_folder.
 
-* Generate the local zip files from the given list of transport requests
+          " Generate the local zip files from the given list of transport requests
           lo_transport_zipper->generate_files(
             it_trkorr = lt_trkorr
             ig_logic  = zcl_abapgit_ui_factory=>get_popups( )->popup_folder_logic( ) ).
 
-* Open output folder if user asked it
+          " Open output folder if user asked it
           lcl_gui=>open_folder_frontend( lo_transport_zipper->get_folder( ) ).
 
         ELSE.
-* No data found for the provided selection criterias
+          " No data found for the provided selection criterias
           zcx_abapgit_exception=>raise( 'No transport requests selected' ).
         ENDIF.
 

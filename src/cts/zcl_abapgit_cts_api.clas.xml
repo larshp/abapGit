@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ABAPGIT_CTS_API</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Change transport system API</DESCRIPT>
+    <DESCRIPT>abapGit - Change Transport System API</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

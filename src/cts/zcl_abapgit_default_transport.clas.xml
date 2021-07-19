@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ABAPGIT_DEFAULT_TRANSPORT</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>abapGit default transport request task</DESCRIPT>
+    <DESCRIPT>abapGit - Default Transport Request</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

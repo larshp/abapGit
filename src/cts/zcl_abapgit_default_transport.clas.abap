@@ -1,59 +1,53 @@
 CLASS zcl_abapgit_default_transport DEFINITION
   PUBLIC
-  CREATE PRIVATE .
+  CREATE PRIVATE.
 
   PUBLIC SECTION.
-    CLASS-METHODS:
-      get_instance
-        RETURNING
-          VALUE(ro_instance) TYPE REF TO zcl_abapgit_default_transport
-        RAISING
-          zcx_abapgit_exception.
 
-    METHODS:
-      constructor
-        RAISING
-          zcx_abapgit_exception,
-
-      set
-        IMPORTING
-          iv_transport TYPE trkorr
-        RAISING
-          zcx_abapgit_exception,
-
-      reset
-        RAISING
-          zcx_abapgit_exception,
-      get
-        RETURNING
-          VALUE(rs_default_task) TYPE e070use
-        RAISING
-          zcx_abapgit_exception .
-
-
+    CLASS-METHODS get_instance
+      RETURNING
+        VALUE(ro_instance) TYPE REF TO zcl_abapgit_default_transport
+      RAISING
+        zcx_abapgit_exception.
+    METHODS constructor
+      RAISING
+        zcx_abapgit_exception.
+    METHODS set
+      IMPORTING
+        !iv_transport TYPE trkorr
+      RAISING
+        zcx_abapgit_exception.
+    METHODS reset
+      RAISING
+        zcx_abapgit_exception.
+    METHODS get
+      RETURNING
+        VALUE(rs_default_task) TYPE e070use
+      RAISING
+        zcx_abapgit_exception.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
-    CLASS-DATA go_instance TYPE REF TO zcl_abapgit_default_transport .
-    DATA mv_is_set_by_abapgit TYPE abap_bool .
-    DATA ms_save TYPE e070use .
+    CLASS-DATA go_instance TYPE REF TO zcl_abapgit_default_transport.
+    DATA mv_is_set_by_abapgit TYPE abap_bool.
+    DATA ms_save TYPE e070use.
 
     METHODS store
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS restore
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS set_internal
       IMPORTING
         !iv_transport TYPE trkorr
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     METHODS clear
       IMPORTING
         !is_default_task TYPE e070use
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
 ENDCLASS.
 
 

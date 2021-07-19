@@ -1,6 +1,6 @@
 CLASS zcl_abapgit_transport DEFINITION
   PUBLIC
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
@@ -12,19 +12,19 @@ CLASS zcl_abapgit_transport DEFINITION
       RETURNING
         VALUE(rv_xstr)     TYPE xstring
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS to_tadir
       IMPORTING
-        it_transport_headers TYPE trwbo_request_headers
+        !it_transport_headers TYPE trwbo_request_headers
       RETURNING
-        VALUE(rt_tadir)      TYPE zif_abapgit_definitions=>ty_tadir_tt
+        VALUE(rt_tadir)       TYPE zif_abapgit_definitions=>ty_tadir_tt
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS add_all_objects_to_trans_req
       IMPORTING
-        iv_key TYPE zif_abapgit_persistence=>ty_value
+        !iv_key TYPE zif_abapgit_persistence=>ty_value
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PROTECTED SECTION.
 
     CLASS-METHODS read_requests
@@ -33,22 +33,23 @@ CLASS zcl_abapgit_transport DEFINITION
       RETURNING
         VALUE(rt_requests) TYPE trwbo_requests
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS find_top_package
       IMPORTING
         !it_tadir         TYPE zif_abapgit_definitions=>ty_tadir_tt
       RETURNING
         VALUE(rv_package) TYPE devclass
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
     CLASS-METHODS resolve
       IMPORTING
         !it_requests    TYPE trwbo_requests
       RETURNING
         VALUE(rt_tadir) TYPE zif_abapgit_definitions=>ty_tadir_tt
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
   PRIVATE SECTION.
+
     CLASS-METHODS collect_all_objects
       IMPORTING
         iv_key            TYPE zif_abapgit_persistence=>ty_value
@@ -173,7 +174,7 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
 
 
   METHOD find_top_package.
-* assumption: all objects in transport share a common super package
+    " assumption: all objects in transport share a common super package
 
     DATA: lt_obj   TYPE zif_abapgit_sap_package=>ty_devclass_tt,
           lt_super TYPE zif_abapgit_sap_package=>ty_devclass_tt,
@@ -190,7 +191,7 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
     LOOP AT it_tadir ASSIGNING <ls_tadir>.
       lt_obj = zcl_abapgit_factory=>get_sap_package( <ls_tadir>-devclass )->list_superpackages( ).
 
-* filter out possibilities from lt_super
+      " filter out possibilities from lt_super
       LOOP AT lt_super INTO lv_super.
         lv_index = sy-tabix.
         READ TABLE lt_obj FROM lv_super TRANSPORTING NO FIELDS.
@@ -201,11 +202,14 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
     ENDLOOP.
 
     READ TABLE lt_super INDEX lines( lt_super ) INTO rv_package.
+
   ENDMETHOD.
 
 
   METHOD read_requests.
+
     DATA lt_requests LIKE rt_requests.
+
     FIELD-SYMBOLS <ls_trkorr> LIKE LINE OF it_trkorr.
 
     LOOP AT it_trkorr ASSIGNING <ls_trkorr>.
@@ -223,10 +227,12 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
 
       APPEND LINES OF lt_requests TO rt_requests.
     ENDLOOP.
+
   ENDMETHOD.
 
 
   METHOD resolve.
+
     DATA: lv_object     TYPE tadir-object,
           lv_obj_name   TYPE tadir-obj_name,
           lv_trobj_name TYPE trobj_name,
@@ -236,7 +242,6 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
 
     FIELD-SYMBOLS: <ls_request> LIKE LINE OF it_requests,
                    <ls_object>  LIKE LINE OF <ls_request>-objects.
-
 
     LOOP AT it_requests ASSIGNING <ls_request>.
       LOOP AT <ls_request>-objects ASSIGNING <ls_object>.
@@ -271,12 +276,13 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
     SORT rt_tadir BY object ASCENDING obj_name ASCENDING.
     DELETE ADJACENT DUPLICATES FROM rt_tadir COMPARING object obj_name.
     DELETE rt_tadir WHERE table_line IS INITIAL.
+
   ENDMETHOD.
 
 
   METHOD to_tadir.
-    DATA: lt_requests TYPE trwbo_requests.
 
+    DATA: lt_requests TYPE trwbo_requests.
 
     IF lines( it_transport_headers ) = 0.
       RETURN.
@@ -284,6 +290,7 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
 
     lt_requests = read_requests( it_transport_headers ).
     rt_tadir = resolve( lt_requests ).
+
   ENDMETHOD.
 
 
@@ -295,7 +302,6 @@ CLASS zcl_abapgit_transport IMPLEMENTATION.
           lo_dot_abapgit    TYPE REF TO zcl_abapgit_dot_abapgit,
           ls_local_settings TYPE zif_abapgit_persistence=>ty_repo-local_settings,
           lt_trkorr         TYPE trwbo_request_headers.
-
 
     IF is_trkorr IS SUPPLIED.
       APPEND is_trkorr TO lt_trkorr.
